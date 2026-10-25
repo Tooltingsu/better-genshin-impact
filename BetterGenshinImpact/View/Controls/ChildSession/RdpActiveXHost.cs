@@ -323,6 +323,14 @@ internal sealed class RdpActiveXHost : AxHost
         return key.ScanCode | (key.IsExtended ? extendedScanCodeFlag : 0);
     }
 
+    internal void ConfirmExistingSessionConnection()
+    {
+        if (_connectionAttemptInProgress && ConnectedState == 1)
+        {
+            OnLoginComplete();
+        }
+    }
+
     private void OnLoginComplete()
     {
         _connectionAttemptInProgress = false;
